@@ -17,7 +17,7 @@ public class PlayerMovement : MonoBehaviour
         //(Input.GetKey("d") || Input.GetKey("right"))
         if (Input.GetAxisRaw("Horizontal") == 1)
         {
-            transform.localScale = new Vector3(-2, 2, 2);
+            transform.localScale = new Vector3(-1, 1, 1);
             transform.rotation = Quaternion.Euler(0f, 0f, 0f);
             facingRight = true;
 
@@ -25,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
         //(Input.GetKey("a") || Input.GetKey("left"))
         if (Input.GetAxisRaw("Horizontal") == -1)
         {
-            transform.localScale = new Vector3(2, 2, 2);
+            transform.localScale = new Vector3(1, 1, 1);
             transform.rotation = Quaternion.Euler(0f, 0f, 0f);
             facingLeft = true;
 
@@ -36,11 +36,11 @@ public class PlayerMovement : MonoBehaviour
             transform.rotation = Quaternion.Euler(0f, 180f, 0f);
             if (transform.rotation.y > 0f && facingRight)
             {   
-                transform.localScale = new Vector3(-1 * transform.localScale.x , 2, 2);
+                transform.localScale = new Vector3(-1 * transform.localScale.x , 1, 1);
             }
             if (transform.rotation.y > 0f && facingLeft)
             {
-                transform.localScale = new Vector3(-1 * transform.localScale.x , 2, 2);
+                transform.localScale = new Vector3(-1 * transform.localScale.x , 1, 1);
             }
         }
         //Input.GetKey("s") || Input.GetKey("down")
