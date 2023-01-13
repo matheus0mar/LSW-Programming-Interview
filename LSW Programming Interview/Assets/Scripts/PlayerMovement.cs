@@ -14,22 +14,24 @@ public class PlayerMovement : MonoBehaviour
         bool facingRight = false;
         bool facingLeft = false;
 
-
-        if ((Input.GetKey("d") || Input.GetKey("right")) )
+        //(Input.GetKey("d") || Input.GetKey("right"))
+        if (Input.GetAxisRaw("Horizontal") == 1)
         {
             transform.localScale = new Vector3(-2, 2, 2);
             transform.rotation = Quaternion.Euler(0f, 0f, 0f);
             facingRight = true;
 
         }
-        if ((Input.GetKey("a") || Input.GetKey("left")) )
+        //(Input.GetKey("a") || Input.GetKey("left"))
+        if (Input.GetAxisRaw("Horizontal") == -1)
         {
             transform.localScale = new Vector3(2, 2, 2);
             transform.rotation = Quaternion.Euler(0f, 0f, 0f);
             facingLeft = true;
 
         }
-        if (Input.GetKey("w") || Input.GetKey("up"))
+        //Input.GetKey("w") || Input.GetKey("up")
+        if (Input.GetAxisRaw("Vertical") == 1)
         {
             transform.rotation = Quaternion.Euler(0f, 180f, 0f);
             if (transform.rotation.y > 0f && facingRight)
@@ -41,7 +43,8 @@ public class PlayerMovement : MonoBehaviour
                 transform.localScale = new Vector3(-1 * transform.localScale.x , 2, 2);
             }
         }
-        if (Input.GetKey("s") || Input.GetKey("down"))
+        //Input.GetKey("s") || Input.GetKey("down")
+        if (Input.GetAxisRaw("Vertical") == -1)
         {
             transform.rotation = Quaternion.Euler(0f, 0f, 0f);
         }
