@@ -19,6 +19,10 @@ public class SceneController : MonoBehaviour
 
     [SerializeField]
     private GameObject buyButton;
+    [SerializeField]
+    private GameObject shopPanel;
+    [SerializeField]
+    private GameObject player;
 
 
     // Start is called before the first frame update
@@ -57,5 +61,18 @@ public class SceneController : MonoBehaviour
             rightDoor.SetBool("close", true);
         }
 
+    }
+
+    public void OpenShop()
+    {
+        shopPanel.SetActive(true);
+        player.GetComponent<PlayerMovement>().enabled = false;
+
+    }
+
+    public void CloseShop()
+    {
+        shopPanel.SetActive(false);
+        player.GetComponent<PlayerMovement>().enabled = true;
     }
 }
