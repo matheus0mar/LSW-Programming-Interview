@@ -19,11 +19,7 @@ public class SceneController : MonoBehaviour
 
     [SerializeField]
     private GameObject buyButton;
-    [SerializeField]
-    private GameObject shopPanel;
-    [SerializeField]
-    private GameObject player;
-
+    
 
     // Start is called before the first frame update
     void Start()
@@ -34,7 +30,7 @@ public class SceneController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -63,16 +59,9 @@ public class SceneController : MonoBehaviour
 
     }
 
-    public void OpenShop()
+    public void ExitGame()
     {
-        shopPanel.SetActive(true);
-        player.GetComponent<PlayerMovement>().enabled = false;
-
+        Application.Quit();
     }
 
-    public void CloseShop()
-    {
-        shopPanel.SetActive(false);
-        player.GetComponent<PlayerMovement>().enabled = true;
-    }
 }
