@@ -7,6 +7,7 @@ using TMPro;
 
 public class ShopController : MonoBehaviour
 {
+    //Lists of items prefabs----------------------------------
     [SerializeField]
     private List<GameObject> armours = new List<GameObject>();
     [SerializeField]
@@ -14,31 +15,31 @@ public class ShopController : MonoBehaviour
     [SerializeField]
     private List<GameObject> weapons = new List<GameObject>();
 
+    //shopPreview ans Player separeted parts-----------------------
     [SerializeField]
     private SpriteRenderer previewBody, previewHead, previewWeapon;
-
     [SerializeField]
     private SpriteRenderer playerBody, playerHead, playerWeapon;
-
     [SerializeField]
     private GameObject previewShield, playerShield, shopPanel, player;
 
+    //animators-----------------------------
     [SerializeField] 
     private Animator playerAnim, moneyAnim;
 
+    //Money UI var---------------------------
     public static int moneyAmount;
     public static int maxMoneyAmount = 9999;
-
     [SerializeField] 
     private int addMoneyAmount;
-
     [SerializeField]
     private GameObject addCashButton;
-
     [SerializeField]
     private TextMeshProUGUI moneyText;
 
+    //Shop utilitie-------
     private bool equiped;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -48,22 +49,26 @@ public class ShopController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Limit max money amount--------------------------------------
         if(moneyAmount >= maxMoneyAmount)
         {
             addCashButton.GetComponent<Button>().interactable = false;
         }
+
+        //Show money left------------------------
         moneyText.text = moneyAmount.ToString();
     }
     
+    //function to add cash button-----------------
     public void AddCash()
     {
         moneyAmount += addMoneyAmount;
-        moneyAnim.SetBool("moneyWarning", false);
+        moneyAnim.SetBool("moneyWarning", false);//turn off noMoneyWarning animation
 
     }
 
 
-
+    //Function to Buy and change preview Armour---------------------------------------------------------------------
     public void ChangeArmour()
     {
         string clickedButtonName = EventSystem.current.currentSelectedGameObject.name;
@@ -91,6 +96,7 @@ public class ShopController : MonoBehaviour
         }
     }
 
+    //Function to Buy and change preview Helmets---------------------------------------------------------------------
     public void ChangeHelmet()
     {
         string clickedButtonName = EventSystem.current.currentSelectedGameObject.name;
@@ -118,6 +124,7 @@ public class ShopController : MonoBehaviour
         }
     }
 
+    //Function to Buy and change preview Weapons---------------------------------------------------------------------
     public void ChangeWeapon()
     {
         string clickedButtonName = EventSystem.current.currentSelectedGameObject.name;
@@ -146,6 +153,7 @@ public class ShopController : MonoBehaviour
         }
     }
 
+    //Equip the bought things on main player--------
     public void EquipOnPlayer()
     {
         playerBody.sprite = previewBody.sprite;
@@ -153,6 +161,8 @@ public class ShopController : MonoBehaviour
         playerWeapon.sprite = previewWeapon.sprite;
         equiped = true;
     }
+
+    //Disable shield on button----------------------
     public void DisablePreviewShield()
     {
         if(previewShield.activeSelf == true)
@@ -165,17 +175,21 @@ public class ShopController : MonoBehaviour
         }
     }
 
+    //Open shop on Buy button------------------------------------
     public void OpenShop()
     {
         shopPanel.SetActive(true);
-        player.GetComponent<PlayerMovement>().enabled = false;
+        player.GetComponent<PlayerMovement>().enabled = false;//Main player stays idle while the shop is opened
 
     }
 
+    //Close shop on X button------------------------------------
     public void CloseShop()
     {
         shopPanel.SetActive(false);
-        player.GetComponent<PlayerMovement>().enabled = true;
+        player.GetComponent<PlayerMovement>().enabled = true;//Main player stays idle while the shop is opened
+
+        //Turn On and Off shield of main player based on preview
         if (previewShield.activeSelf == false)
         {
             playerShield.SetActive(false);
@@ -185,6 +199,7 @@ public class ShopController : MonoBehaviour
             playerShield.SetActive(true);
         }
 
+        //If you dont equip the bought itens the preview return to original--------------------
         if(equiped == false)
         {
             previewBody.sprite = armours[0].transform.GetChild(0).GetComponent<Image>().sprite;

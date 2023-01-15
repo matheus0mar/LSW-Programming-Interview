@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
         bool facingRight = false;
         bool facingLeft = false;
 
-        //(Input.GetKey("d") || Input.GetKey("right"))
+        //Change player directions deppending on the button pressed -------------------------
         if (Input.GetAxisRaw("Horizontal") == 1)
         {
             transform.localScale = new Vector3(-1, 1, 1);
@@ -22,15 +22,12 @@ public class PlayerMovement : MonoBehaviour
             facingRight = true;
 
         }
-        //(Input.GetKey("a") || Input.GetKey("left"))
         if (Input.GetAxisRaw("Horizontal") == -1)
         {
             transform.localScale = new Vector3(1, 1, 1);
             transform.rotation = Quaternion.Euler(0f, 0f, 0f);
             facingLeft = true;
-
         }
-        //Input.GetKey("w") || Input.GetKey("up")
         if (Input.GetAxisRaw("Vertical") == 1)
         {
             transform.rotation = Quaternion.Euler(0f, 180f, 0f);
@@ -43,16 +40,18 @@ public class PlayerMovement : MonoBehaviour
                 transform.localScale = new Vector3(-1 * transform.localScale.x , 1, 1);
             }
         }
-        //Input.GetKey("s") || Input.GetKey("down")
         if (Input.GetAxisRaw("Vertical") == -1)
         {
             transform.rotation = Quaternion.Euler(0f, 0f, 0f);
         }
 
+        //Play movement animations-----------------
         anim.SetFloat("Horizontal", movement.x);
         anim.SetFloat("Vertical", movement.y);
         anim.SetFloat("Speed", movement.magnitude);
 
+        //Change player position----------------------------------------------------
         transform.position = transform.position + movement * speed * Time.deltaTime;
+
     }
 }

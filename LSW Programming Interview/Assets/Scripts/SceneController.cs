@@ -19,20 +19,8 @@ public class SceneController : MonoBehaviour
 
     [SerializeField]
     private GameObject buyButton;
-    
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
+   
+    //Interaction if the player is near seller and door-------
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.name == "triggerSHOP")
@@ -45,6 +33,8 @@ public class SceneController : MonoBehaviour
             rightDoor.SetBool("close", false);
         }
     }
+
+    //Interaction if the player is far seller and door--------
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.name == "triggerSHOP")
@@ -59,6 +49,7 @@ public class SceneController : MonoBehaviour
 
     }
 
+    //Quit Game------------
     public void ExitGame()
     {
         Application.Quit();
